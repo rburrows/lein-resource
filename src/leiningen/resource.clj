@@ -198,9 +198,7 @@ Return a FileSpec"
       (when (or (not update)
                 (and update (<  dest-ts src-ts)))
         (msg project-info "Copy" src "to" (str dest-file))
-        (let [s (if-not skip
-                  (stencil/render-string (slurp src) value-map)
-                  (io/file src))]
+        (let [s (io/file src)]
           (io/make-parents dest-file)
           (io/copy s dest-file)
           (.setExecutable dest-file (.canExecute src-file))
